@@ -9,7 +9,7 @@ const main = function () {
     array.pop();
     return array.map((a) => a.trim());
   });
-  const isExists = bfs(pairs, 'jj', 'aa');
+  const isExists = bfs(pairs, 'bb', 'jj');
   console.log(isExists);
 };
 

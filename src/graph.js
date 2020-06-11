@@ -9,7 +9,7 @@ const createGraph = function (graph, pair) {
     graph[pair[0]].push(pair[1]);
     return graph;
   }
-  graph[pair[0]] = [pair[1]];
+  graph[pair[0]] = (pair[1] && [pair[1]]) || [];
   return graph;
 };
 
@@ -32,7 +32,7 @@ const bfs = function (pairs, source, target) {
   while (queue.length > 0) {
     const node = queue.shift();
     visitedNodes.push(node);
-    if (node === target) {
+    if (node === target && graph[node].length > 0) {
       return true;
     }
     queue = enqueueChildren(graph, queue, visitedNodes, node);
