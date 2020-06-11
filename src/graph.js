@@ -9,7 +9,7 @@ const createGraph = function (graph, pair) {
     graph[pair[0]].push(pair[1]);
     return graph;
   }
-  graph[pair[0]] = (pair[1] && [pair[1]]) || [];
+  graph[pair[0]] = [pair[1]];
   return graph;
 };
 
