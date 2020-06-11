@@ -25,16 +25,25 @@ const enqueueChildren = function (graph, queue, visitedNodes, node) {
   return queue;
 };
 
+const isEqual = function (node, target, isFirstIteration, children) {
+  return (
+    (node === target && !isFirstIteration) ||
+    (children && children.includes(target))
+  );
+};
+
 const bfs = function (pairs, source, target) {
   const graph = pairs.reduce(createGraph, {});
   let queue = [source];
   const visitedNodes = [];
+  let isFirstIteration = true;
   while (queue.length > 0) {
     const node = queue.shift();
-    visitedNodes.push(node);
-    if (node === target && graph[node].length > 0) {
+    if (isEqual(node, target, isFirstIteration, graph[node])) {
       return true;
     }
+    isFirstIteration = false;
+    visitedNodes.push(node);
     queue = enqueueChildren(graph, queue, visitedNodes, node);
   }
   return false;
