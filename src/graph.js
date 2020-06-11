@@ -13,8 +13,7 @@ const createGraph = function (graph, pair) {
   return graph;
 };
 
-const enqueueChildren = function (graph, queue, visitedNodes, node) {
-  const children = graph[node];
+const enqueueChildren = function (children, queue, visitedNodes) {
   if (children) {
     children.forEach((child) => {
       if (!(queue.includes(child) || visitedNodes.includes(child))) {
@@ -42,9 +41,9 @@ const bfs = function (pairs, source, target) {
     if (isEqual(node, target, isFirstIteration, graph[node])) {
       return true;
     }
-    isFirstIteration = false;
     visitedNodes.push(node);
-    queue = enqueueChildren(graph, queue, visitedNodes, node);
+    queue = enqueueChildren(graph[node], queue, visitedNodes);
+    isFirstIteration = false;
   }
   return false;
 };

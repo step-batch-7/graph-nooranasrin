@@ -15,7 +15,7 @@ describe('bfs', () => {
       !bfs(
         [
           ['a', 'c'],
-          ['b', 'c'],
+          ['b', 'd'],
         ],
         'a',
         'b'
@@ -32,6 +32,20 @@ describe('bfs', () => {
         ],
         'a',
         'b'
+      )
+    );
+  });
+
+  it('should give false when the pairs contains three nodes and they are sparsely connected', () => {
+    assert.ok(
+      !bfs(
+        [
+          ['a', 'b'],
+          ['c', 'd'],
+          ['e', 'f'],
+        ],
+        'a',
+        'c'
       )
     );
   });
