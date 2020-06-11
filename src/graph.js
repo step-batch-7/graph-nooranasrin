@@ -3,7 +3,6 @@
 // Source => from
 // To => to
 // Should return true.
-const fs = require('fs');
 
 const createGraph = function (graph, pair) {
   if (pair[0] in graph) {
