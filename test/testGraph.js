@@ -11,42 +11,31 @@ describe('bfs', () => {
   });
 
   it('should give false when the pairs contains two nodes and they are not connected', () => {
-    assert.ok(
-      !bfs(
-        [
-          ['a', 'c'],
-          ['b', 'd'],
-        ],
-        'a',
-        'b'
-      )
-    );
+    const pairs = [
+      ['a', 'c'],
+      ['b', 'd'],
+    ];
+    assert.ok(!bfs(pairs, 'a', 'b'));
   });
 
   it('should give true when the pairs contains two nodes and they are perfectly connected', () => {
-    assert.ok(
-      bfs(
-        [
-          ['a', 'b'],
-          ['b', 'a'],
-        ],
-        'a',
-        'b'
-      )
-    );
+    const pairs = [
+      ['a', 'b'],
+      ['b', 'a'],
+    ];
+    assert.ok(bfs(pairs, 'a', 'b'));
   });
 
   it('should give false when the pairs contains three nodes and they are sparsely connected', () => {
-    assert.ok(
-      !bfs(
-        [
-          ['a', 'b'],
-          ['c', 'd'],
-          ['e', 'f'],
-        ],
-        'a',
-        'c'
-      )
-    );
+    const pairs = [
+      ['a', 'b'],
+      ['c', 'd'],
+      ['e', 'f'],
+    ];
+    assert.ok(!bfs(pairs, 'a', 'c'));
+  });
+
+  it("should give false when the pair doesn't contain anything", () => {
+    assert.ok(!bfs([], 'a', 'b'));
   });
 });
