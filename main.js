@@ -1,5 +1,5 @@
 const fs = require('fs');
-const bfs = require('./src/graph').bfs;
+const { bfs, dfs } = require('./src/graph');
 
 const main = function () {
   let pairs = fs.readFileSync('./data.txt', 'utf8').split('\n');
@@ -9,7 +9,11 @@ const main = function () {
     array.pop();
     return array.map((a) => a.trim());
   });
-  const isExists = bfs(pairs, 'bb', 'jj');
+  // let pairs = [
+  //   ['a', 'b'],
+  //   ['b', 'c'],
+  // ];
+  const isExists = dfs(pairs, 'bb', 'jj');
   console.log(isExists);
 };
 
