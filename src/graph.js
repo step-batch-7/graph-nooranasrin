@@ -16,7 +16,7 @@ const createGraph = function (graph, pair) {
 const enqueueChildren = function (children, queue, visitedNodes) {
   if (children) {
     children.forEach((child) => {
-      if (!(queue.includes(child) || visitedNodes.includes(child))) {
+      if (!(queue.includes(child) || visitedNodes.has(child))) {
         queue.push(child);
       }
     });
@@ -34,14 +34,14 @@ const isEqual = function (node, target, isFirstIteration, children) {
 const bfs = function (pairs, source, target) {
   const graph = pairs.reduce(createGraph, {});
   let queue = [source];
-  const visitedNodes = [];
+  const visitedNodes = new Set();
   let isFirstIteration = true;
   while (queue.length > 0) {
     const node = queue.shift();
     if (isEqual(node, target, isFirstIteration, graph[node])) {
       return true;
     }
-    visitedNodes.push(node);
+    visitedNodes.add(node);
     queue = enqueueChildren(graph[node], queue, visitedNodes);
     isFirstIteration = false;
   }
