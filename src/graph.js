@@ -51,7 +51,6 @@ const bfs = function (pairs, source, target) {
 const dfs = function (pairs, source, target, visitedNodes = new Set()) {
   const graph = pairs.reduce(createGraph, {});
   visitedNodes.add(source);
-  console.log(visitedNodes);
   if (source === target) return true;
   const children = graph[source] || [];
 
