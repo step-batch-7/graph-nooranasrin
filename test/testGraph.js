@@ -41,9 +41,9 @@ describe('bfs', () => {
 });
 
 describe('dfs', () => {
-  // it('should return false when the pair contains single node and it is not connected to itself', () => {
-  //   assert.ok(!dfs([['a', 'b']], 'a', 'a'));
-  // });
+  it('should return false when the pair contains single node and it is not connected to itself', () => {
+    assert.ok(!dfs([['a', 'b']], 'a', 'a'));
+  });
 
   it('should return true when the pair contains single node and it is connected to itself', () => {
     assert.ok(dfs([['a', 'a']], 'a', 'a'));

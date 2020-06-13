@@ -9,10 +9,6 @@ const main = function () {
     array.pop();
     return array.map((a) => a.trim());
   });
-  // let pairs = [
-  //   ['a', 'b'],
-  //   ['b', 'c'],
-  // ];
   const isExists = dfs(pairs, 'bb', 'jj');
   console.log(isExists);
 };
