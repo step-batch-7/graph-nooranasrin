@@ -48,25 +48,21 @@ const bfs = function (pairs, source, target) {
   return false;
 };
 
-const dfs = function (
-  pairs,
-  source,
-  target,
-  visited = new Set(),
-  isFirstNode = true
-) {
+const dfs = function (pairs, source, target, visited = new Set()) {
   const graph = pairs.reduce(createGraph, {});
   visited.add(source);
-  if (isEqual(source, target, isFirstNode, graph[source])) {
-    return true;
-  }
   const children = graph[source] || [];
 
-  return children.some((child) => {
-    if (!visited.has(child)) {
-      return dfs(pairs, child, target, visited, false);
+  for (let i = 0; i < children.length; i++) {
+    if (children[i] === target) {
+      return true;
     }
-  });
+
+    if (!visited.has(children[i])) {
+      dfs(pairs, children[i], target, visited);
+    }
+  }
+  return false;
 };
 
 module.exports = { bfs, dfs };
