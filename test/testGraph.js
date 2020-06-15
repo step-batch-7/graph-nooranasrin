@@ -19,7 +19,7 @@ describe('bfs', () => {
   });
 
   it('should give true when the pairs contains two nodes and they are perfectly connected', () => {
-    const pairs = [
+    let pairs = [
       ['a', 'b'],
       ['b', 'a'],
     ];
@@ -58,11 +58,21 @@ describe('dfs', () => {
   });
 
   it('should give true when the pairs contains two nodes and they are perfectly connected', () => {
-    const pairs = [
+    let pairs = [
       ['a', 'b'],
       ['b', 'a'],
     ];
     assert.ok(dfs(pairs, 'a', 'b'));
+
+    pairs = [
+      [10, 5],
+      [10, 15],
+      [5, 1],
+      [5, 8],
+      [15, 18],
+      [15, 12],
+    ];
+    assert.ok(bfs(pairs, 10, 12));
   });
 
   it('should give false when the pairs contains three nodes and they are sparsely connected', () => {

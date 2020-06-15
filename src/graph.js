@@ -59,10 +59,11 @@ const dfs = function (pairs, source, target, visited = new Set()) {
     }
 
     if (!visited.has(children[i])) {
-      dfs(pairs, children[i], target, visited);
+      const result = dfs(pairs, children[i], target, visited);
+      if (result) return result;
     }
   }
   return false;
 };
 
-module.exports = { bfs, dfs };
+module.exports = { bfs, dfs, createGraph };
