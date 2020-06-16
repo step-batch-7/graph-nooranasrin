@@ -35,8 +35,7 @@ const bfs = function (pairs, source, target) {
   return false;
 };
 
-const dfs = function (pairs, source, target, visited = new Set()) {
-  const graph = pairs.reduce(createGraph, {});
+const dfs = function (graph, source, target, visited = new Set()) {
   visited.add(source);
   const children = graph[source] || [];
 
@@ -46,7 +45,7 @@ const dfs = function (pairs, source, target, visited = new Set()) {
     }
 
     if (!visited.has(children[i])) {
-      const result = dfs(pairs, children[i], target, visited);
+      const result = dfs(graph, children[i], target, visited);
       if (result) return result;
     }
   }
