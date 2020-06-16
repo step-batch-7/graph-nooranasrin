@@ -1,36 +1,25 @@
 const createGraph = require('./createGraph');
 
-const enqueueChildren = function (children, queue, visitedNodes) {
-  if (children) {
-    children.forEach((child) => {
-      if (!(queue.includes(child) || visitedNodes.has(child))) {
-        queue.push(child);
-      }
-    });
-  }
-  return queue;
-};
-
-const isEqual = function (node, target, isFirstIteration, children) {
-  return (
-    (node === target && !isFirstIteration) ||
-    (children && children.includes(target))
-  );
-};
+const isVisitedOrInQueue = (queue, child, visited) =>
+  !(queue.includes(child) || visited.has(child));
 
 const bfs = function (pairs, source, target) {
   const graph = pairs.reduce(createGraph, {});
   let queue = [source];
-  const visitedNodes = new Set();
-  let isFirstIteration = true;
+  const visited = new Set();
   while (queue.length > 0) {
     const node = queue.shift();
-    if (isEqual(node, target, isFirstIteration, graph[node])) {
-      return true;
+    const children = graph[node] || [];
+
+    for (let i = 0; i < children.length; i++) {
+      if (children[i] === target) {
+        return true;
+      }
+      if (isVisitedOrInQueue(queue, children[i], visited)) {
+        visited.add(node);
+        queue.push(children[i]);
+      }
     }
-    visitedNodes.add(node);
-    queue = enqueueChildren(graph[node], queue, visitedNodes);
-    isFirstIteration = false;
   }
   return false;
 };
