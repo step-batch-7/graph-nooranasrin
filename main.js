@@ -1,5 +1,6 @@
 const fs = require('fs');
-const { bfs, dfs } = require('./src/graph');
+const { bfs, dfs, createGraph } = require('./src/graph');
+const findPath = require('./src/path');
 
 const main = function () {
   let pairs = fs.readFileSync('./data.txt', 'utf8').split('\n');
@@ -9,8 +10,8 @@ const main = function () {
     array.pop();
     return array.map((a) => a.trim());
   });
-  const isExists = dfs(pairs, 'bb', 'jj');
-  console.log(isExists);
+  const graph = pairs.reduce(createGraph, {});
+  console.log(findPath(graph, 'bb', 'hh'));
 };
 
 main();
