@@ -1,6 +1,6 @@
 const fs = require('fs');
-const { bfs, dfs, createGraph } = require('./src/graph');
-const findPath = require('./src/path');
+const { bfs, dfs, findPath } = require('./src/graph');
+const createGraph = require('./src/createGraph');
 
 const main = function () {
   let pairs = fs.readFileSync('./data.txt', 'utf8').split('\n');

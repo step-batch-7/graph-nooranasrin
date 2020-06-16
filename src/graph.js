@@ -1,18 +1,3 @@
-//Example
-// Pairs => [[from,to],[to,from]]
-// Source => from
-// To => to
-// Should return true.
-
-const createGraph = function (graph, pair) {
-  if (pair[0] in graph) {
-    graph[pair[0]].push(pair[1]);
-    return graph;
-  }
-  graph[pair[0]] = (pair[1] && [pair[1]]) || [];
-  return graph;
-};
-
 const enqueueChildren = function (children, queue, visitedNodes) {
   if (children) {
     children.forEach((child) => {
@@ -66,4 +51,24 @@ const dfs = function (pairs, source, target, visited = new Set()) {
   return false;
 };
 
-module.exports = { bfs, dfs, createGraph };
+const findPath = function (graph, source, target, visited = new Set()) {
+  visited.add(source);
+  const children = graph[source] || [];
+  const parent = [source];
+
+  for (let i = 0; i < children.length; i++) {
+    if (children[i] === target) {
+      return parent.concat(children[i]);
+    }
+
+    if (!visited.has(children[i])) {
+      const path = parent.concat(findPath(graph, children[i], target, visited));
+      if (path.includes(target)) {
+        return path;
+      }
+    }
+  }
+  return [];
+};
+
+module.exports = { bfs, dfs, findPath };
