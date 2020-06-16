@@ -1,3 +1,5 @@
+const createGraph = require('./createGraph');
+
 const enqueueChildren = function (children, queue, visitedNodes) {
   if (children) {
     children.forEach((child) => {
